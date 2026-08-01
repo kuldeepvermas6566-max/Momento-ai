@@ -35,9 +35,11 @@ export class DecisionEngine{
 
         }
 
+        const knownIntents = ["greeting","name","creator","bye","coding","ai"];
+
         if(
 
-            intent === "coding"
+            knownIntents.includes(intent)
 
         ){
 
