@@ -4,20 +4,15 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Momento AI</title>
 
-<link rel="stylesheet"
-href="chat.css">
+<link rel="stylesheet" href="chat.css">
 
 </head>
 
 <body>
-
-<!-- Sidebar -->
 
 <aside class="sidebar">
 
@@ -25,19 +20,13 @@ href="chat.css">
 
 <div class="brand">
 
-<img src="logo.png"
-alt="Momento AI">
+<img src="logo.png" alt="Momento AI">
 
-<span>
-
-Momento AI
-
-</span>
+<span>Momento AI</span>
 
 </div>
 
-<button
-class="new-chat">
+<button class="new-chat">
 
 + New Chat
 
@@ -45,33 +34,23 @@ class="new-chat">
 
 </div>
 
-<div
-class="chat-history">
+<div class="chat-history">
 
-<h3>
+<h3>Recent Chats</h3>
 
-Recent Chats
-
-</h3>
-
-<div class="history-list">
-
-<!-- Future Chat History -->
+<div class="history-list"></div>
 
 </div>
 
-</div>
+<div class="sidebar-bottom">
 
-<div
-class="sidebar-bottom">
-
-<button>
+<button id="settingsBtn">
 
 Settings
 
 </button>
 
-<button>
+<button id="profileBtn">
 
 Profile
 
@@ -81,17 +60,11 @@ Profile
 
 </aside>
 
-<!-- Main -->
-
 <main class="main">
 
 <header class="topbar">
 
-<h2>
-
-Momento AI
-
-</h2>
+<h2>Momento AI</h2>
 
 </header>
 
@@ -99,11 +72,9 @@ Momento AI
 class="chat-area"
 id="chatArea">
 
-<div
-class="welcome">
+<div class="welcome">
 
-<img src="logo.png"
-alt="logo">
+<img src="logo.png" alt="Momento AI">
 
 <h1>
 
@@ -120,7 +91,6 @@ Think • Learn • Evolve
 </div>
 
 </section>
-<!-- Suggested Prompts -->
 
 <section class="suggestions">
 
@@ -150,8 +120,6 @@ Generate Ideas
 
 </section>
 
-<!-- Chat Input -->
-
 <footer class="chat-footer">
 
 <div class="chat-input-box">
@@ -159,26 +127,20 @@ Generate Ideas
 <button
 class="icon-btn"
 id="attachBtn"
-title="Attach File">
+title="Attach">
 
 📎
 
 </button>
 
 <input
-
 type="text"
-
 id="userInput"
-
 placeholder="Message Momento AI...">
 
 <button
-
 class="icon-btn"
-
 id="voiceBtn"
-
 title="Voice">
 
 🎤
@@ -186,11 +148,8 @@ title="Voice">
 </button>
 
 <button
-
 class="send-btn"
-
 id="sendBtn"
-
 title="Send">
 
 ➤
@@ -208,9 +167,8 @@ Momento AI may produce incorrect information. Verify important facts.
 </footer>
 
 </main>
-
-<script src="chat.js"></script>
+<script type="module" src="chat.js"></script>
 
 </body>
 
-                        </html>
+</html>
