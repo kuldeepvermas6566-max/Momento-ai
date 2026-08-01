@@ -1,139 +1,133 @@
 // ======================================
-// Momento AI
-// Chat UI Controller v1.0
+// Momento AI Chat Controller v2.0
 // ======================================
 
 import { askAI } from "./ai.js";
 
 const chatArea = document.getElementById("chatArea");
-
 const input = document.getElementById("userInput");
-
 const sendBtn = document.getElementById("sendBtn");
 
-function createMessage(role,text){
+// ----------------------------
+// Create Message
+// ----------------------------
 
-const div=document.createElement("div");
+function createMessage(role, text) {
 
-div.className=`message ${role}`;
+    const msg = document.createElement("div");
 
-div.textContent=text;
+    msg.className = "message " + role;
 
-chatArea.appendChild(div);
+    msg.innerHTML = formatMessage(text);
 
-chatArea.scrollTop=chatArea.scrollHeight;
+    chatArea.appendChild(msg);
+
+    chatArea.scrollTop = chatArea.scrollHeight;
 
 }
 
+// ----------------------------
+// Basic Markdown
+// ----------------------------
+
+function formatMessage(text){
+
+    return text
+
+    .replace(/\n/g,"<br>")
+
+    .replace(/\*\*(.*?)\*\*/g,"<b>$1</b>")
+
+    .replace(/`(.*?)`/g,"<code>$1</code>");
+
+}
+
+// ----------------------------
+// Typing Indicator
+// ----------------------------
+
 function showTyping(){
 
-const typing=document.createElement("div");
+    const typing=document.createElement("div");
 
-typing.className="message ai";
+    typing.className="message ai";
 
-typing.id="typing";
+    typing.id="typing";
 
-typing.innerHTML="Momento AI is thinking...";
+    typing.innerHTML="Thinking<span>.</span><span>.</span><span>.</span>";
 
-chatArea.appendChild(typing);
+    chatArea.appendChild(typing);
 
-chatArea.scrollTop=chatArea.scrollHeight;
+    chatArea.scrollTop=chatArea.scrollHeight;
 
 }
 
 function removeTyping(){
 
-const typing=document.getElementById("typing");
+    const t=document.getElementById("typing");
 
-if(typing){
-
-typing.remove();
+    if(t) t.remove();
 
 }
 
-}
-// ======================================
+// ----------------------------
 // Send Message
-// ======================================
+// ----------------------------
 
 async function sendMessage(){
 
-const message=input.value.trim();
+    const message=input.value.trim();
 
-if(message==="") return;
+    if(message==="") return;
 
-// User Message
+    createMessage("user",message);
 
-createMessage("user",message);
+    input.value="";
 
-input.value="";
+    showTyping();
 
-// AI Typing
+    try{
 
-showTyping();
+        const reply=await askAI(message);
 
-try{
+        removeTyping();
 
-const reply=await askAI(message);
+        createMessage("ai",reply);
 
-removeTyping();
+    }
 
-createMessage("ai",reply);
+    catch(error){
 
-}
+        removeTyping();
 
-catch(error){
+        createMessage(
 
-removeTyping();
+            "ai",
 
-createMessage(
+            "Internal AI Error."
 
-"ai",
+        );
 
-"Sorry! Something went wrong."
+        console.error(error);
 
-);
-
-console.error(error);
+    }
 
 }
 
-}
-
-// ======================================
+// ----------------------------
 // Events
-// ======================================
+// ----------------------------
 
-sendBtn.addEventListener(
+sendBtn.onclick=sendMessage;
 
-"click",
+input.addEventListener("keydown",(e)=>{
 
-sendMessage
+    if(e.key==="Enter"){
 
-);
+        sendMessage();
 
-input.addEventListener(
+    }
 
-"keydown",
+});
 
-(e)=>{
-
-if(e.key==="Enter"){
-
-sendMessage();
-
-}
-
-}
-
-);
-
-// ======================================
-// Welcome
-// ======================================
-
-console.log(
-
-"Momento AI Chat Ready"
-
-);
+console.log("Momento AI Ready");
